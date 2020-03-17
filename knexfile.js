@@ -3,12 +3,15 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3', //it can be any db driver
-    connection: { 
-      //connection can be a string or an object
-      filename: './data/car-dealer.db3'  // address is with respect to root
+    client: "sqlite3",
+    useNullAsDefault: true,
+    connection: {
+      filename: "./data/cars.db3"
     },
-    useNullAsDefault: true, //only needed for sqlite
+    
+    migrations: {
+      directory: "./data/migrations"
+    }
   },
 
   staging: {
@@ -44,10 +47,3 @@ module.exports = {
   }
 
 };
-
-
-
-//create blank knex file
-// add knex globally using: npm i -g knex
-// Initialize the knexFile using: knex init
-// after inialization, knex file will populate with development, staging and production objects
