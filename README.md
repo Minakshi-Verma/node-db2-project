@@ -37,3 +37,46 @@ The client for this API is a car dealer who has provided the following specs:
 - Add seed data to the database using `knex seeds`
 - Add `UPDATE` and `DELETE` operations to your API.
 - Write a schema file for a `sales` table. This table should track information on the sale of each car. You may wish to research `foreign keys` in order to link each sale to the entry in `cars` which sold.
+
+
+
+
+
+
+migration:
+exports.up = function(knex) {
+  
+return knex.schema.createTable("cars", tbl=>{
+    tbl.increments();
+    tbl
+        .string("VIN", 20)
+        .notNullable()
+        .unique()
+        .index()
+    tbl
+        .string("Make", 255)
+        .notNullable()
+    tbl
+        .string("Model", 255)
+    tbl
+        .integer("Mileage")
+                
+  })    
+};
+
+exports.down = function(knex) {
+ return knex.schema.dropTableIfExists("cars")
+  
+};
+
+
+
+
+
+ development: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data/car-dealer.db3'
+    },
+    useNullAsDefault: true, // only needed for SQLite
+  },
